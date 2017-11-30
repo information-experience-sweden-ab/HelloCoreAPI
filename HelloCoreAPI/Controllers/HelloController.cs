@@ -17,7 +17,7 @@ namespace HelloCoreAPI.Controllers
         {
 
             var scopes = HttpContext.User.FindFirst("http://schemas.microsoft.com/identity/claims/scope")?.Value;
-            if (!string.IsNullOrEmpty("demo.read") && scopes != null && scopes.Split(' ').Any(s => s.Equals("demo.read")))
+            if (!string.IsNullOrEmpty(Startup.ScopeRead) && scopes != null && scopes.Split(' ').Any(s => s.Equals(Startup.ScopeRead)))
             {
                 return Ok("Hello There");
             }
