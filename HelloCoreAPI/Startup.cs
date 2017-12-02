@@ -33,6 +33,8 @@ namespace HelloCoreAPI
                 options.Filters.Add(new RequireHttpsAttribute());
             });
 
+            services.AddCors();
+
             services.AddAuthentication(options =>
             {
                 options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -57,6 +59,9 @@ namespace HelloCoreAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(builder =>
+               builder.WithOrigins("http://localhost:6420").AllowAnyHeader().AllowAnyMethod());
 
             ScopeRead = Configuration["AzureAdB2C:ScopeRead"];
             app.UseAuthentication();
